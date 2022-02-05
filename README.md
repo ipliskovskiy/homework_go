@@ -1,1 +1,1 @@
-# homework_go
+# gb_golang
