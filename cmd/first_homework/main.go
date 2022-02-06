@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"gb_golang/first_homework/tools"
+	"gb_golang/internal/tools"
 	"os"
 
 	"github.com/enescakir/emoji"
@@ -10,11 +10,11 @@ import (
 
 func main() {
 	var name string
-	var iHaveAnswer bool = false
+	var HaveAnswer bool = false
 
 	fmt.Println("Доброго времени суток.", emoji.WavingHand)
 
-	for iHaveAnswer != true {
+	for !HaveAnswer {
 		fmt.Print(emoji.ManTechnologist, " Введите имя или exit для выхода: ")
 		fmt.Scanf("%s\n", &name)
 		if name == "exit" {
@@ -22,7 +22,7 @@ func main() {
 			os.Exit(0)
 		}
 		if tools.Checkname(name) {
-			iHaveAnswer = true
+			HaveAnswer = true
 			// break
 		} else {
 			fmt.Println("Извините, но Вы ввыли не корректное имя. Имя может содержать цифры, строчные и заглавные буквы русского и английского языка, но не может начинаться с цифры или содержать знаки припенания.")
