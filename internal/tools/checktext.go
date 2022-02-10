@@ -1,13 +1,14 @@
 package tools
 
-import (
-	"regexp"
-)
+import "regexp"
 
-var userNameRegexp = regexp.MustCompile(`^[A-zА-я]+[A-zА-я0-9]*$`)
+var reUserNameRegexp = regexp.MustCompile(`^[A-zА-я]+[A-zА-я0-9]*$`)
+var reCoordinates = regexp.MustCompile(`^[0-2]+(.|,|-|:)+[0-2]$`)
 
 func Checkname(name string) bool {
-	matched := userNameRegexp.MatchString(name)
+	return reUserNameRegexp.MatchString(name)
+}
 
-	return matched
+func CheckCoordinates(coordinates string) bool {
+	return reCoordinates.MatchString(coordinates)
 }
