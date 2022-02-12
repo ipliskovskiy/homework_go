@@ -17,7 +17,7 @@ func New() Game {
 	g.countGame = 0
 	g.field = field.New()
 	for x := 0; x < 2; x++ {
-		g.players[x] = player.New(cli.GetPlayerName(), cli.GetSide())
+		g.players[x], _ = player.New(cli.GetPlayerName(), cli.GetSide())
 	}
 	return g
 }
