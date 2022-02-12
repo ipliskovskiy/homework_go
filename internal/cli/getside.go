@@ -21,7 +21,7 @@ func GetSide() string {
 		if stringWorker.CheckSide(side) {
 			HaveSide = true
 		} else {
-			fmt.Println("Вы ввели не корректное значение координат, коордитинаты должны быть [0-2].[0-2]")
+			fmt.Println("Вы ввели не корректное значение стороны, сторона может быть X или 0")
 		}
 	}
 
