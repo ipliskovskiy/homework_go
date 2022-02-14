@@ -1,7 +1,9 @@
 package field
 
+import "gb_golang/internal/tools/stringWorker"
+
 type Field struct {
-	cross, zero [3][3]int
+	desk [3][3]string
 }
 
 func New() Field {
@@ -9,11 +11,22 @@ func New() Field {
 	return f
 }
 
-func Set(f Field, isX bool, x_coordinate int, y_coordinate int) bool {
-	checkField(f, x_coordinate, y_coordinate)
-	return false
+func (f *Field) checkField(x int, y int) bool {
+	if f.desk[x][y] != "" {
+		return false
+	}
+	return true
 }
 
-func checkField(f Field, x int, y int) bool {
-	return false
+func (f *Field) SetCoordinate(goSide string, coordinate string) bool {
+	var err error
+	x_coordinate, y_coordinate, err := stringWorker.GetCoordinate(coordinate)
+	if err != nil {
+		panic(err)
+	}
+	if !f.checkField(x_coordinate, y_coordinate) {
+		return false
+	}
+	f.desk[x_coordinate][y_coordinate] = goSide
+	return true
 }
