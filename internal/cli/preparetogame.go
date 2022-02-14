@@ -34,6 +34,6 @@ func CLI_PrepareToGame() (field.Field, [2]player.Player) {
 		}
 	}
 
-	fmt.Println("Подготовка завершена.\n\n")
+	fmt.Printf("Подготовка завершена.\n\n")
 	return field.New(), players
 }
