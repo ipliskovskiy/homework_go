@@ -20,12 +20,7 @@ func New(name string, side string) (Player, error) {
 	}
 }
 
-// func New(name string, side string) Player {
-// 	p := Player{side: side, name: name, victory: 0, countGame: 0}
-// 	return p
-// }
-
-func (p *Player) GetSideBool() string {
+func (p *Player) GetSide() string {
 	return p.side
 }
 

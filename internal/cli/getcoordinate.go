@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func GetCoordinate() (int, int) {
+func CLI_GetCoordinate() (int, int) {
 	var HaveCoordinates = false
 	var coordinates string
 	for !HaveCoordinates {

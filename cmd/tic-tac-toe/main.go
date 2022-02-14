@@ -1,9 +1,9 @@
 package main
 
 import (
-	"gb_golang/internal/game"
+	"gb_golang/internal/cli"
 )
 
 func main() {
-	game.New()
+	cli.CLI_PrepareToGame()
 }

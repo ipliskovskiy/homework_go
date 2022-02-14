@@ -12,7 +12,7 @@ type Game struct {
 	players   [2]player.Player
 }
 
-func New() Game {
+func New(f field.Field) Game {
 	var g Game
 	g.countGame = 0
 	g.field = field.New()

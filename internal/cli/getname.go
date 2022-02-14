@@ -4,21 +4,17 @@ import (
 	"fmt"
 	"gb_golang/internal/tools/stringWorker"
 	"os"
-
-	"github.com/enescakir/emoji"
 )
 
-func GetPlayerName() string {
+func CLI_GetPlayerName() string {
 	var name string
 	var HaveAnswer bool = false
 
-	fmt.Println("Доброго времени суток.", emoji.WavingHand)
-
 	for !HaveAnswer {
-		fmt.Print(emoji.ManTechnologist, " Введите имя или exit для выхода: ")
+		fmt.Print("Введите имя или exit для выхода: ")
 		fmt.Scanf("%s\n", &name)
 		if name == "exit" {
-			fmt.Println("Goodbye ", emoji.DizzyFace)
+			fmt.Println("Goodbye!")
 			os.Exit(0)
 		}
 		if stringWorker.Checkname(name) {
