@@ -11,7 +11,11 @@ func main() {
 	g.Start()
 
 	for g.IsRun() {
-		cli.CLI_GetCoordinate(g)
+		x_coordinate, y_coordinate := cli.CLI_GetCoordinate(g.WhichPlayer())
+		err := g.MakeMove(uint8(x_coordinate), uint8(y_coordinate))
+		if err != nil {
+			cli.PrintError(err)
+		}
 
 	}
 

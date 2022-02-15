@@ -33,6 +33,11 @@ func (g *Game) Start() bool {
 	return g.isGameRun
 }
 
+func (g *Game) Stop() bool {
+	g.isGameRun = false
+	return !g.isGameRun
+}
+
 func (g *Game) WhichPlayer() player.Player {
 	if g.players[0].GetSide() == g.goSide {
 		return g.players[0]
@@ -41,6 +46,15 @@ func (g *Game) WhichPlayer() player.Player {
 	}
 }
 
-func (g *Game) MakeMove(coordinate string) {
-	g.field.SetCoordinate(g.goSide, coordinate)
+func (g *Game) MakeMove(x_coordinate uint8, y_coordinate uint8) error {
+	err := g.field.SetCoordinate(g.goSide, x_coordinate, y_coordinate)
+	if err == nil {
+		if g.goSide == "X" {
+			g.goSide = "0"
+		} else {
+			g.goSide = "X"
+		}
+		return nil
+	}
+	return err
 }

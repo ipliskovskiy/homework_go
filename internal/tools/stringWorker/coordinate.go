@@ -1,10 +1,12 @@
 package stringWorker
 
-import "errors"
+import (
+	"errors"
+)
 
-func GetCoordinate(coordinates string) (int, int, error) {
+func GetCoordinate(coordinates string) (uint8, uint8, error) {
 	if len(coordinates) != 3 {
-		return -1, -1, errors.New("Bad coordinates! Error: no correct string")
+		return 0, 0, errors.New("bad coordinates! error: no correct string")
 	}
-	return int(coordinates[0]), int(coordinates[2]), nil
+	return uint8(coordinates[0] - 48), uint8(coordinates[2] - 48), nil //не нашел как конвертировать byte в int без 48
 }
