@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"gb_golang/internal/field"
 	"gb_golang/internal/player"
 )
@@ -49,6 +50,7 @@ func (g *Game) WhichPlayer() player.Player {
 func (g *Game) MakeMove(x_coordinate uint8, y_coordinate uint8) error {
 	err := g.field.SetCoordinate(g.goSide, x_coordinate, y_coordinate)
 	if err == nil {
+		fmt.Println(g.checkViner())
 		if g.goSide == "X" {
 			g.goSide = "0"
 		} else {
@@ -57,4 +59,43 @@ func (g *Game) MakeMove(x_coordinate uint8, y_coordinate uint8) error {
 		return nil
 	}
 	return err
+}
+
+func (g *Game) checkViner() bool {
+	f := g.field.GetField()
+	//== for test
+	fmt.Println("|", f[0][0], "|", f[0][1], "|", f[0][2])
+	fmt.Println("|", f[1][0], "|", f[1][1], "|", f[1][2])
+	fmt.Println("|", f[2][0], "|", f[2][1], "|", f[2][2])
+	//== for test
+
+	if f[1][1] == g.goSide {
+		switch {
+		case f[1][0] == f[1][2] && f[1][2] == g.goSide:
+			return true
+		case f[0][0] == f[2][2] && f[2][2] == g.goSide:
+			return true
+		case f[2][0] == f[0][2] && f[0][2] == g.goSide:
+			return true
+		case f[0][1] == f[2][2] && f[2][2] == g.goSide:
+			return true
+		default:
+			return false
+		}
+	} else if f[0][0] == g.goSide {
+		switch {
+		case f[0][1] == f[0][2] && f[0][2] == g.goSide:
+			return true
+		case f[1][0] == f[2][0] && f[2][0] == g.goSide:
+			return true
+		default:
+			return false
+		}
+	} else if f[2][0] == f[2][1] && f[2][1] == f[2][2] && f[2][2] == g.goSide {
+		return true
+	} else if f[0][2] == f[1][2] && f[1][2] == f[2][2] && f[2][2] == g.goSide {
+		return true
+	}
+
+	return false
 }
