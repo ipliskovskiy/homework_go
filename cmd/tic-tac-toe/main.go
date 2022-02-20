@@ -8,20 +8,10 @@ import (
 
 func main() {
 	var g game.Game
+	cli.Hello()
 	var i delivery.ProgrammInterface = cli.Cli{}
-
 	g = game.New(i)
-	g.IsRun()
 
-	// g = game.New(cli.CLI_PrepareToGame())
-	// g.Start()
-
-	// for g.IsRun() {
-	// 	x_coordinate, y_coordinate := cli.CLI_GetCoordinate(g.WhichPlayer())
-	// 	err := g.MakeMove(uint8(x_coordinate), uint8(y_coordinate))
-	// 	if err != nil {
-	// 		cli.PrintError(err)
-	// 	}
-	// }
+	g.Start()
 
 }

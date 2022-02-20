@@ -6,4 +6,6 @@ import (
 
 type ProgrammInterface interface {
 	GetPlayers() [2]player.Player
+	GetCoordinate(p player.Player) (uint8, uint8)
+	SendMessage(string, error)
 }

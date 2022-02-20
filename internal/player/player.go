@@ -29,3 +29,19 @@ func (p *Player) GetSide() string {
 func (p *Player) GetName() string {
 	return p.name
 }
+
+func (p *Player) GetVictory() int {
+	return p.victory
+}
+
+func (p *Player) GetCountGame() int {
+	return p.countGame
+}
+
+func (p *Player) AddVictory() {
+	p.victory++
+}
+
+func (p *Player) AddCountGame() {
+	p.countGame++
+}

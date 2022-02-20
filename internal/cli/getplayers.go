@@ -3,19 +3,13 @@ package cli
 import (
 	"fmt"
 	"gb_golang/internal/player"
-	// "github.com/enescakir/emoji"
 )
-
-func (c Cli) StartGame() {
-	fmt.Println("Hi")
-}
 
 func (c Cli) GetPlayers() [2]player.Player {
 	thereIsAPlayers := false
 	var players [2]player.Player
 	var err error
 
-	// fmt.Println("Доброго времени суток.", emoji.WavingHand, "\nНачнем консольную версию игры крестики нолики. ", emoji.ManTechnologist)
 	fmt.Println("Нам необходимо два пользователя. Один играет за X другой за 0.")
 
 	for !thereIsAPlayers {

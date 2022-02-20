@@ -24,14 +24,14 @@ func (f *Field) CheckValidateCoordinate(x_coordinate uint8, y_coordinate uint8) 
 	return ValidateCoordinate
 }
 
-func (f *Field) ifFieldEmpty(x_coordinate uint8, y_coordinate uint8) error {
+func (f *Field) isFieldEmpty(x_coordinate uint8, y_coordinate uint8) error {
 	if f.desk[x_coordinate][y_coordinate] == "" {
 		return nil
 	}
 	return FieldIsNotEmpty
 }
 
-func (f *Field) CheckFullDesk() bool {
+func (f *Field) IsDeskFull() bool {
 	if f.moves >= 9 {
 		return true
 	}
@@ -43,7 +43,7 @@ func (f *Field) SetCoordinate(goSide string, x_coordinate uint8, y_coordinate ui
 	if err != nil {
 		return err
 	}
-	err = f.ifFieldEmpty(uint8(x_coordinate), uint8(y_coordinate))
+	err = f.isFieldEmpty(uint8(x_coordinate), uint8(y_coordinate))
 	if err != nil {
 		return err
 	}
