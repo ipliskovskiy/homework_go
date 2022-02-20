@@ -2,18 +2,20 @@ package cli
 
 import (
 	"fmt"
-	"gb_golang/internal/field"
 	"gb_golang/internal/player"
-
-	"github.com/enescakir/emoji"
+	// "github.com/enescakir/emoji"
 )
 
-func CLI_PrepareToGame() (field.Field, [2]player.Player) {
+func (c Cli) StartGame() {
+	fmt.Println("Hi")
+}
+
+func (c Cli) GetPlayers() [2]player.Player {
 	thereIsAPlayers := false
 	var players [2]player.Player
 	var err error
 
-	fmt.Println("Доброго времени суток.", emoji.WavingHand, "\nНачнем консольную версию игры крестики нолики. ", emoji.ManTechnologist)
+	// fmt.Println("Доброго времени суток.", emoji.WavingHand, "\nНачнем консольную версию игры крестики нолики. ", emoji.ManTechnologist)
 	fmt.Println("Нам необходимо два пользователя. Один играет за X другой за 0.")
 
 	for !thereIsAPlayers {
@@ -35,5 +37,5 @@ func CLI_PrepareToGame() (field.Field, [2]player.Player) {
 	}
 
 	fmt.Printf("Подготовка завершена.\n\n")
-	return field.New(), players
+	return players
 }

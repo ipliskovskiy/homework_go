@@ -1,25 +1,34 @@
 package game
 
 import (
+	"errors"
 	"fmt"
+	"gb_golang/internal/delivery"
 	"gb_golang/internal/field"
 	"gb_golang/internal/player"
 )
 
+var ProgrammInterfaceIsNil error = errors.New("programm interface is nil")
+
 type Game struct {
-	isGameRun bool
-	goSide    string
-	countGame uint8
-	field     field.Field
-	players   [2]player.Player
+	isGameRun         bool
+	goSide            string
+	countGame         uint8
+	field             field.Field
+	players           [2]player.Player
+	programmInterface delivery.ProgrammInterface
 }
 
-func New(field field.Field, p [2]player.Player) Game {
+func New(i delivery.ProgrammInterface) Game {
+	if i == nil {
+		panic(ProgrammInterfaceIsNil)
+	}
 	var g Game
 	g.countGame = 0
 	g.isGameRun = false
-	g.field = field
-	g.players = p
+	g.players = i.GetPlayers()
+	g.field = field.New()
+	g.programmInterface = i
 	return g
 }
 
@@ -71,29 +80,29 @@ func (g *Game) checkViner() bool {
 
 	if f[1][1] == g.goSide {
 		switch {
-		case f[1][0] == f[1][2] && f[1][2] == g.goSide:
+		case f[1][2] == g.goSide && f[1][0] == f[1][2]:
 			return true
-		case f[0][0] == f[2][2] && f[2][2] == g.goSide:
+		case f[2][2] == g.goSide && f[0][0] == f[2][2]:
 			return true
-		case f[2][0] == f[0][2] && f[0][2] == g.goSide:
+		case f[0][2] == g.goSide && f[2][0] == f[0][2]:
 			return true
-		case f[0][1] == f[2][2] && f[2][2] == g.goSide:
+		case f[2][2] == g.goSide && f[0][1] == f[2][2]:
 			return true
 		default:
 			return false
 		}
 	} else if f[0][0] == g.goSide {
 		switch {
-		case f[0][1] == f[0][2] && f[0][2] == g.goSide:
+		case f[0][2] == g.goSide && f[0][1] == f[0][2]:
 			return true
-		case f[1][0] == f[2][0] && f[2][0] == g.goSide:
+		case f[2][0] == g.goSide && f[1][0] == f[2][0]:
 			return true
 		default:
 			return false
 		}
-	} else if f[2][0] == f[2][1] && f[2][1] == f[2][2] && f[2][2] == g.goSide {
+	} else if f[2][2] == g.goSide && f[2][0] == f[2][1] && f[2][1] == f[2][2] {
 		return true
-	} else if f[0][2] == f[1][2] && f[1][2] == f[2][2] && f[2][2] == g.goSide {
+	} else if f[2][2] == g.goSide && f[0][2] == f[1][2] && f[1][2] == f[2][2] {
 		return true
 	}
 

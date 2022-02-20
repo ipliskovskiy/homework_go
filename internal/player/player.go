@@ -5,6 +5,8 @@ import (
 	"gb_golang/internal/tools/stringWorker"
 )
 
+var BadParametrsForCreatingPlayer error = errors.New("incorrect parameters for creating a player")
+
 type Player struct {
 	name               string
 	side               string
@@ -16,7 +18,7 @@ func New(name string, side string) (Player, error) {
 		p := Player{side: side, name: name, victory: 0, countGame: 0}
 		return p, nil
 	} else {
-		return Player{}, errors.New("Incorrect parameters for creating a player")
+		return Player{}, BadParametrsForCreatingPlayer
 	}
 }
 
