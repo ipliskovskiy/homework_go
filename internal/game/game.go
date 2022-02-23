@@ -49,17 +49,10 @@ func (g *Game) Stop() {
 	g.isGameRun = false
 }
 
-// func (g *Game) GetStatistic() {
-// 	str := ("\n======================\n")
-// 	str = str + ("Количество партий: " + str(g.countGame) + "\n")
-// 	for i := range g.players {
-// 		str = str + ("")
-// 		str = str + ("Пользователь " + g.players[i].GetName() + "\nСторона: " + g.players[i].GetSide() + ":\n")
-// 		str = str + ("Всего игр: " + string(g.players[i].GetCountGame()) + "\n")
-// 		str = str + ("Количество побед:" + string(g.players[i].GetVictory()) + "\n")
-// 		if i != len(g.players)-1 {
-// 			str = str + ("\n------------------\n")
-// 		}
-// 	}
-// 	g.programmInterface.SendMessage(str, nil)
-// }
+func (g *Game) GetPlayers() [2]player.Player {
+	return g.players
+}
+
+func (g *Game) GetCountGame() uint8 {
+	return g.countGame
+}
