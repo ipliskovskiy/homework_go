@@ -1,21 +1,17 @@
 package game
 
-import (
-	"gb_golang/internal/player"
-)
-
 func (g *Game) run() {
-	var p player.Player
+	var idPlayer int
 	for g.IsRun() {
-		p = g.WhichPlayer()
-		x_coordinate, y_coordinate := g.programmInterface.GetCoordinate(p)
+		idPlayer = g.whichPlayer()
+		x_coordinate, y_coordinate := g.programmInterface.GetCoordinate(g.players[idPlayer])
 		err := g.field.SetCoordinate(g.goSide, x_coordinate, y_coordinate)
 		if err != nil {
 			g.programmInterface.SendMessage("", err)
 		} else {
 			if g.isСheckViner() {
-				str := ("\nПобеда!!!\nПобеду одержал игрок: " + p.GetName())
-				p.AddVictory()
+				g.players[idPlayer].AddVictory()
+				str := ("\nПобеда!!!\nПобеду одержал игрок: " + g.players[idPlayer].GetName())
 				g.programmInterface.SendMessage(str, nil)
 				g.Stop()
 			} else if g.field.IsDeskFull() {

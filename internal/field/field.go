@@ -56,3 +56,8 @@ func (f *Field) SetCoordinate(goSide string, x_coordinate uint8, y_coordinate ui
 func (f *Field) GetField() [3][3]string {
 	return f.desk
 }
+
+// func (f *Field) ResetField() { //Правильно ли? newField же останеться свободной для сборщика мусора?
+// 	var newField [3][3]string
+// 	f.desk = newField
+// }

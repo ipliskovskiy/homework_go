@@ -26,7 +26,6 @@ func New(i delivery.ProgrammInterface) Game {
 	g.countGame = 0
 	g.isGameRun = false
 	g.players = i.GetPlayers()
-	g.field = field.New()
 	g.programmInterface = i
 	return g
 }
@@ -37,6 +36,7 @@ func (g *Game) IsRun() bool {
 
 func (g *Game) Start() {
 	g.isGameRun = true
+	g.field = field.New()
 	g.countGame++
 	g.goSide = "X"
 	for i := range g.players {

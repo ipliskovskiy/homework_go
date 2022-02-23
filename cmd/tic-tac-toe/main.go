@@ -11,5 +11,5 @@ func main() {
 	var i delivery.ProgrammInterface = cli.Cli{}
 	cli.Hello()
 	g = game.New(i)
-	cli.StartGame(g)
+	cli.StartGameCLI(g)
 }
