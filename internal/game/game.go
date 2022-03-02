@@ -1,25 +1,33 @@
 package game
 
 import (
-	"fmt"
+	"errors"
+	"gb_golang/internal/delivery"
 	"gb_golang/internal/field"
 	"gb_golang/internal/player"
 )
 
+var ErrProgrammInterfaceIsNil error = errors.New("programm interface is nil")
+
 type Game struct {
-	isGameRun bool
-	goSide    string
-	countGame uint8
-	field     field.Field
-	players   [2]player.Player
+	isGameRun         bool
+	goSide            string
+	countGame         uint8
+	field             field.Field
+	players           [2]player.Player
+	programmInterface delivery.ProgrammInterface
 }
 
-func New(field field.Field, p [2]player.Player) Game {
+func New(i delivery.ProgrammInterface) Game {
+	if i == nil {
+		panic(ErrProgrammInterfaceIsNil)
+	}
 	var g Game
 	g.countGame = 0
 	g.isGameRun = false
-	g.field = field
-	g.players = p
+	g.players = i.GetPlayers()
+	g.field = field.New()
+	g.programmInterface = i
 	return g
 }
 
@@ -27,75 +35,31 @@ func (g *Game) IsRun() bool {
 	return g.isGameRun
 }
 
-func (g *Game) Start() bool {
+func (g *Game) Start() {
 	g.isGameRun = true
 	g.countGame++
 	g.goSide = "X"
-	return g.isGameRun
+	for i := range g.players {
+		g.players[i].AddCountGame()
+	}
+	g.run()
 }
 
-func (g *Game) Stop() bool {
+func (g *Game) Stop() {
 	g.isGameRun = false
-	return !g.isGameRun
 }
 
-func (g *Game) WhichPlayer() player.Player {
-	if g.players[0].GetSide() == g.goSide {
-		return g.players[0]
-	} else {
-		return g.players[1]
-	}
-}
-
-func (g *Game) MakeMove(x_coordinate uint8, y_coordinate uint8) error {
-	err := g.field.SetCoordinate(g.goSide, x_coordinate, y_coordinate)
-	if err == nil {
-		fmt.Println(g.checkViner())
-		if g.goSide == "X" {
-			g.goSide = "0"
-		} else {
-			g.goSide = "X"
-		}
-		return nil
-	}
-	return err
-}
-
-func (g *Game) checkViner() bool {
-	f := g.field.GetField()
-	//== for test
-	fmt.Println("|", f[0][0], "|", f[0][1], "|", f[0][2])
-	fmt.Println("|", f[1][0], "|", f[1][1], "|", f[1][2])
-	fmt.Println("|", f[2][0], "|", f[2][1], "|", f[2][2])
-	//== for test
-
-	if f[1][1] == g.goSide {
-		switch {
-		case f[1][0] == f[1][2] && f[1][2] == g.goSide:
-			return true
-		case f[0][0] == f[2][2] && f[2][2] == g.goSide:
-			return true
-		case f[2][0] == f[0][2] && f[0][2] == g.goSide:
-			return true
-		case f[0][1] == f[2][2] && f[2][2] == g.goSide:
-			return true
-		default:
-			return false
-		}
-	} else if f[0][0] == g.goSide {
-		switch {
-		case f[0][1] == f[0][2] && f[0][2] == g.goSide:
-			return true
-		case f[1][0] == f[2][0] && f[2][0] == g.goSide:
-			return true
-		default:
-			return false
-		}
-	} else if f[2][0] == f[2][1] && f[2][1] == f[2][2] && f[2][2] == g.goSide {
-		return true
-	} else if f[0][2] == f[1][2] && f[1][2] == f[2][2] && f[2][2] == g.goSide {
-		return true
-	}
-
-	return false
-}
+// func (g *Game) GetStatistic() {
+// 	str := ("\n======================\n")
+// 	str = str + ("Количество партий: " + str(g.countGame) + "\n")
+// 	for i := range g.players {
+// 		str = str + ("")
+// 		str = str + ("Пользователь " + g.players[i].GetName() + "\nСторона: " + g.players[i].GetSide() + ":\n")
+// 		str = str + ("Всего игр: " + string(g.players[i].GetCountGame()) + "\n")
+// 		str = str + ("Количество побед:" + string(g.players[i].GetVictory()) + "\n")
+// 		if i != len(g.players)-1 {
+// 			str = str + ("\n------------------\n")
+// 		}
+// 	}
+// 	g.programmInterface.SendMessage(str, nil)
+// }

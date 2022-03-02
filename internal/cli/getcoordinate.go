@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func CLI_GetCoordinate(p player.Player) (uint8, uint8) {
+func (c Cli) GetCoordinate(p player.Player) (uint8, uint8) {
 	HaveCoordinates := false
 	var coordinates string
 

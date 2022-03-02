@@ -4,6 +4,9 @@ import (
 	"errors"
 )
 
+var ValidateCoordinate error = errors.New("bad coordinates")
+var FieldIsNotEmpty error = errors.New("field is not empty")
+
 type Field struct {
 	moves uint8
 	desk  [3][3]string
@@ -14,21 +17,21 @@ func New() Field {
 	return f
 }
 
-func (f *Field) ValidateCoordinate(x_coordinate uint8, y_coordinate uint8) error {
+func (f *Field) CheckValidateCoordinate(x_coordinate uint8, y_coordinate uint8) error {
 	if x_coordinate <= 2 && y_coordinate <= 2 {
 		return nil
 	}
-	return errors.New("Некорректные координаты! Попробуйте другие координаты")
+	return ValidateCoordinate
 }
 
-func (f *Field) ifFieldEmpty(x_coordinate uint8, y_coordinate uint8) error {
+func (f *Field) isFieldEmpty(x_coordinate uint8, y_coordinate uint8) error {
 	if f.desk[x_coordinate][y_coordinate] == "" {
 		return nil
 	}
-	return errors.New("Это поле занято, попробуйте другие координаты.")
+	return FieldIsNotEmpty
 }
 
-func (f *Field) CheckFullDesk() bool {
+func (f *Field) IsDeskFull() bool {
 	if f.moves >= 9 {
 		return true
 	}
@@ -36,11 +39,11 @@ func (f *Field) CheckFullDesk() bool {
 }
 
 func (f *Field) SetCoordinate(goSide string, x_coordinate uint8, y_coordinate uint8) error {
-	err := f.ValidateCoordinate(x_coordinate, y_coordinate)
+	err := f.CheckValidateCoordinate(x_coordinate, y_coordinate)
 	if err != nil {
 		return err
 	}
-	err = f.ifFieldEmpty(uint8(x_coordinate), uint8(y_coordinate))
+	err = f.isFieldEmpty(uint8(x_coordinate), uint8(y_coordinate))
 	if err != nil {
 		return err
 	}
