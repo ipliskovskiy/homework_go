@@ -1,38 +1,22 @@
 package main
 
 import (
-	"fmt"
-	"gb_golang/internal/tools"
-	"os"
+	"gb_golang/internal/cli"
+	"gb_golang/internal/game"
 )
 
 func main() {
-	var coordinates string
-	var HaveCoordinates bool = false
+	var g game.Game
+	g = game.New(cli.CLI_PrepareToGame())
+	g.Start()
 
-	for !HaveCoordinates {
-		fmt.Print("Введите координаты X и Y или exit для выхода: ")
-		fmt.Scanf("%s\n", &coordinates)
-
-		if coordinates == "exit" {
-			fmt.Println("Goodbye!")
-			os.Exit(0)
+	for g.IsRun() {
+		x_coordinate, y_coordinate := cli.CLI_GetCoordinate(g.WhichPlayer())
+		err := g.MakeMove(uint8(x_coordinate), uint8(y_coordinate))
+		if err != nil {
+			cli.PrintError(err)
 		}
 
-		if tools.CheckCoordinates(coordinates) {
-			HaveCoordinates = true
-		} else {
-			fmt.Println("Вы ввели не корректное значение координат, коордитинаты должны быть [0-2].[0-2]")
-		}
-	}
-
-	Xcoordinate, Ycoordinate, err := tools.GetCoordinate(coordinates)
-
-	if err == nil {
-		fmt.Println("Ваш X: ", Xcoordinate)
-		fmt.Println("Ваш Y: ", Ycoordinate)
-	} else {
-		fmt.Println("Error: ", err)
 	}
 
 }
