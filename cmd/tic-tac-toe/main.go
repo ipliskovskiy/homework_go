@@ -16,7 +16,6 @@ func main() {
 		if err != nil {
 			cli.PrintError(err)
 		}
-
 	}
 
 }
