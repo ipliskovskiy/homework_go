@@ -8,10 +8,8 @@ import (
 
 func main() {
 	var g game.Game
-	cli.Hello()
 	var i delivery.ProgrammInterface = cli.Cli{}
+	cli.Hello()
 	g = game.New(i)
-
-	g.Start()
-
+	cli.StartGameCLI(g)
 }

@@ -1,16 +1,19 @@
 package game
 
 import (
+	"errors"
 	"fmt"
-	"gb_golang/internal/player"
 )
 
-func (g *Game) WhichPlayer() player.Player {
-	if g.players[0].GetSide() == g.goSide {
-		return g.players[0]
-	} else {
-		return g.players[1]
+var NoOpponentsFound error = errors.New("no Opponents found")
+
+func (g *Game) whichPlayer() int {
+	for i := range g.players {
+		if g.players[i].GetSide() == g.goSide {
+			return i
+		}
 	}
+	panic("No opponents found")
 }
 
 func (g *Game) isСheckViner() bool {
@@ -38,7 +41,7 @@ func (g *Game) isСheckViner() bool {
 		switch {
 		case f[0][2] == g.goSide && f[0][1] == f[0][2]:
 			return true
-		case f[2][0] == g.goSide && f[1][0] == f[2][0]:
+		case f[2][0] == g.goSide && f[1][0] == f[0][0]:
 			return true
 		default:
 			return false

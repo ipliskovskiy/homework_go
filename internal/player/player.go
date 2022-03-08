@@ -30,7 +30,7 @@ func (p *Player) GetName() string {
 	return p.name
 }
 
-func (p *Player) GetVictory() int {
+func (p *Player) GetCountVictory() int {
 	return p.victory
 }
 
