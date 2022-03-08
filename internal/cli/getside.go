@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func CLI_GetSide() string {
+func CliGetSide() string {
 	var HaveSide = false
 	var side string
 	for !HaveSide {

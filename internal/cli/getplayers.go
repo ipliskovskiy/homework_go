@@ -15,7 +15,7 @@ func (c Cli) GetPlayers() [2]player.Player {
 	for !thereIsAPlayers {
 		for x := 0; x < 2; x++ {
 			fmt.Println("Создадим пользователя №", x+1)
-			players[x], err = player.New(CLI_GetPlayerName(), CLI_GetSide())
+			players[x], err = player.New(CliGetPlayerName(), CliGetSide())
 			if err != nil {
 				fmt.Println("Ууупс! что-то пошло не так.")
 				break

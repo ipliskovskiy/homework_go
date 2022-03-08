@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func CLI_GetPlayerName() string {
+func CliGetPlayerName() string {
 	var name string
 	var HaveAnswer bool = false
 
