@@ -8,7 +8,7 @@ import (
 
 func Hello() {
 	printLOGO()
-	fmt.Println("\n\n\nДоброго времени суток.", emoji.WavingHand, "\nНачинаем консольную версию игры крестики нолики. ", emoji.ManTechnologist, "\n\n")
+	fmt.Print("\n\n\nДоброго времени суток.", emoji.WavingHand, "\nНачинаем консольную версию игры крестики нолики. ", emoji.ManTechnologist, "\n\n")
 }
 
 func printLOGO() {
