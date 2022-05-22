@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <title>{{ .Title}}</title>
+    </head>
+    <link rel="stylesheet" href="css/base.css">
+    <body>
+        <div class="base">
+            <div class="top">
+                <div class="top-p-left"><p> Это крестики нолики.</p></div>
+                <div class="top-p-right"><p>This is a tic tac toe.</p></div>
+            </div>
+            <div class="center">
+                <div class="players">
+                    <div class="message">
+                        {{ .Message }} 
+                    </div>
+                    <div class="questionnaire">
+                        <div class="player1">
+                            Сторона: X
+                            Имя:
+                        </div>
+                        <div class="player2">
+                            Сторона: 0
+                            Имя:
+                        </div>
+                    </div>
+                    <div class="message">
+                        <a href="" class="gradient-button">Start</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <p>{{ .BottomInformation }}</p>
+            </div>
+        </div>
+    </body>
+</html>
