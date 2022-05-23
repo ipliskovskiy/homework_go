@@ -5,7 +5,7 @@
     margin-bottom: 1%;
 }
 .top {
-    background-color: rgb(185, 224, 246);
+    background-image: linear-gradient(to right, rgb(194, 223, 239) 0%, rgb(185, 224, 246) 51%, rgb(131, 204, 246) 100%);
 }
 .top div {
     display: inline-block;
@@ -18,7 +18,7 @@
     margin-right: 1%;
 }
 .bottom {
-    background-color: rgb(185, 224, 246);
+    background-image: linear-gradient(to right, rgb(131, 204, 246) 0%, rgb(185, 224, 246) 51%, rgb(194, 223, 239) 100%);
     margin-bottom: 0%;
 }
 .center {
@@ -40,11 +40,14 @@
     
 }
 .questionnaire div{
-    /* background-color: rgb(70, 198, 50);  */
     display: inline-block;
+    text-align: center;
+}
+.questionnaire input[type=text]{
+    padding: 10px;
 }
 .player1 {
-    background-color: rgb(118, 101, 225); /* Цвет фона слоя */
+    background-color: rgb(194, 223, 239); /* Цвет фона слоя */
     margin-top: 1%;
     margin-left: 1%;
     margin-right: 1%;
@@ -52,7 +55,7 @@
     width: 48%; /* Ширина слоя */
 }
 .player2 {
-    background-color: rgb(158, 239, 225); /* Цвет фона слоя */
+    background-color: rgb(131, 204, 246); /* Цвет фона слоя */
     margin-top: 1%;
     margin-left: 1%;
     margin-right: 1%;
@@ -60,15 +63,10 @@
     float: right;
     width: 48%; /* Ширина слоя */
 }
-
 .message a{
     text-align: center;
     display: block;
-    /* margin: auto auto; */
-    /* margin-left: 50%; */
-    /* margin-right: auto; */
 }
-
 .gradient-button {
     text-decoration: none;
     display: inline-block;
